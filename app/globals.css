@@ -1,0 +1,217 @@
+@import "tailwindcss";
+
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+    background-color: #121212;
+    color: #fff;
+    text-align: center;
+  }
+
+  .navbar {
+    border-radius: 1.3em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 85%;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 139, 0.5);
+    margin: 0 auto 20px;
+  }
+  
+  .navbar-links {
+    display: flex;
+    gap: 15px; /* Espacio entre los enlaces */
+  }
+  
+  .navbar-brand {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #fff;
+  }
+  
+  .navbar-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1em;
+    border: 2px solid transparent;
+    padding: 8px 16px;
+    transition: background-color 0.3s, border-color 0.3s;
+  }
+  
+  .navbar-link:hover {
+    background-color: rgba(255,255,255,0.2);
+    border-color: #fff;
+  }
+  
+  
+  h1, p {
+    margin: 10px;
+  }
+  
+  #new-card-form {
+    margin-bottom: 20px;
+  }
+  
+  #new-card-form input {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1em;
+  }
+  
+  #new-card-form button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #00d4ff;
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  #new-card-form button:hover {
+    background-color: #00ff95;
+  }
+  
+  .board {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+  }
+  
+  .drop-box {
+    min-width: 350px;    
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px dashed transparent;
+    border-radius: 0.5em;
+    box-shadow: 0 0 15px rgba(0,255,255,0.2);
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    gap: 1em;
+    padding: 1em;
+    padding-bottom: 2em; 
+    
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  
+  .drop-box:hover {
+    transform: scale(1.03);
+    border-color: #00d4ff;
+  }
+  
+  .drop-box h2 {
+    font-size: 1.5em;
+    margin-bottom: 0;
+    color: #00d4ff;
+  }
+  
+ 
+  .card {
+    width: 100%;
+    max-width: 300px;   
+    height: 150px;      
+    perspective: 1000px; 
+    cursor: pointer;
+    background-color: transparent;
+    position: relative;  
+  }
+  
+  .card-inner {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    position: relative;
+  }
+  
+  .card.flip .card-inner {
+    transform: rotateY(180deg);
+  }
+  
+  .card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    box-sizing: border-box;
+  }
+  
+  .card-front {
+    background: linear-gradient(45deg, #00d4ff, #1999cc);
+  }
+  
+  .card-back {
+    background: linear-gradient(45deg, #ff0080, #ff8c00);
+    transform: rotateY(180deg);
+  }
+  
+  .question, .answer {
+    font-size: 1.1em;
+    text-align: center;
+    margin: 0;
+  }
+  
+  @media screen and (max-width: 768px) {
+    h1 {
+      font-size: 1.4em;
+    }
+    
+    #new-card-form h2 {
+      font-size: 1.2em;
+    }
+    
+    .card {
+      height: 120px;
+    }
+  }
+
+  .delete-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(19, 6, 196, 0.226);
+    color: rgb(96, 12, 231);
+    border: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 30%;
+    font-size: 1em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .delete-btn:hover {
+    background: rgb(148, 117, 117);
+  }
+
+  
+  #ai-complete-btn {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    margin-left: 5px;
+    border-radius: 5px;
+  }
+  
+  #ai-complete-btn:hover {
+    background-color: #222;
+  }
+  
