@@ -17,8 +17,7 @@ export default function NavBar() {
         </div>
 
         {/* Enlaces a la derecha */}
-        <div className="flex items-center space-x-6 font-sans
-">
+        <div className="flex items-center space-x-6 font-sans">
           <Link href="/" className="text-gray-300 hover:text-white">
             Home :)
           </Link>

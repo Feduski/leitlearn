@@ -50,42 +50,6 @@ body {
     margin: 10px;
   }
   
-  #new-card-form {
-    margin-bottom: 20px;
-  }
-  
-  #new-card-form input {
-    padding: 10px;
-    margin: 5px;
-    border-radius: 5px;
-    border: none;
-    font-size: 1em;
-  }
-  
-  #new-card-form button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #00d4ff;
-    color: #fff;
-    font-size: 1em;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  #new-card-form button:hover {
-    background-color: #00ff95;
-  }
-  
-  .board {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    width: 100%;
-    max-width: 1200px;
-    margin: 20px auto;
-  }
-  
   .drop-box {
     min-width: 350px;    
     background: rgba(255, 255, 255, 0.1);
@@ -200,18 +164,48 @@ body {
     background: rgb(148, 117, 117);
   }
 
-  
-  #ai-complete-btn {
-    background-color: #333;
-    color: white;
-    border: none;
-    padding: 8px 12px;
+  .plus-btn-big {
+    width: 100%;
+    height: 150px; /* igual que .card */
+    background: rgba(255, 255, 255, 0.1);
+    color: #00d4ff;
+    font-size: 3em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    margin-left: 5px;
-    border-radius: 5px;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+  }
+  .plus-btn-big:hover {
+    background: rgba(255, 255, 255, 0.2);
   }
   
-  #ai-complete-btn:hover {
-    background-color: #222;
+  /* Botón pequeño (+) junto al título */
+  .plus-btn-small {
+    background: none;
+    border: none;
+    color: #00d4ff;
+    font-size: 1.5em;
+    cursor: pointer;
+    margin-left: 0.5em;
+    transition: transform 0.3s;
   }
-  
+  .plus-btn-small:hover {
+    transform: scale(1.1);
+  }  
+
+/* Formulario grande que reemplaza al plus (se usa en CreateCardForm, ya definido en el componente) */
+.form-big {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 150px; /* Igual que la tarjeta */
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 0.5em;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+}
