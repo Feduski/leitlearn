@@ -39,8 +39,16 @@ const DropBox: React.FC<DropBoxProps> = ({
     setShowForm(false);
   };
 
-  const handleCompleteWithAI = () => {
-    alert(`Función AI pendiente para la columna: ${box.id}`);
+  const handleCompleteWithAI = async () => {
+    if (!question.trim()) return;
+    
+    const res = await fetch("/api/generateAnswer", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ question }),
+    });
+    const data = await res.json();
+    setAnswer(data.answer);
   };
 
   return (
