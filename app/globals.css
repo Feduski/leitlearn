@@ -218,3 +218,62 @@ body {
   border-color: #00d4ff;
   box-shadow: 0 0 15px rgba(0,212,255,0.2);
 }
+
+/* Estilos mejorados para la tarjeta flip */
+.flip-card {
+  perspective: 1000px;
+  width: 400px;
+  max-width: 100%;
+  height: 500px; /* Altura fija para evitar saltos */
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+/* Estilos adicionales para mejorar la apariencia */
+.flip-card form {
+  width: 100%;
+}
+
+.flip-card input {
+  width: 100%;
+}
+
+/* Asegurar que los botones estén centrados y tengan buen aspecto */
+.flip-card button[type="submit"] {
+  display: block;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+}
+
+/* Mejorar el aspecto del enlace para cambiar entre login/registro */
+.flip-card .text-center {
+  margin-top: 1.5rem;
+}
