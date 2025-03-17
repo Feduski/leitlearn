@@ -2,22 +2,19 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { supabase } from "../../lib/supabaseClient";  // Quita la extensión .ts aquí
+import { supabase } from "../../lib/supabaseClient";
 
 export default function NavBar() {
   const [session, setSession] = useState<any>(null);
 
   useEffect(() => {
-    // Define una función async dentro del useEffect
     const getSession = async () => {
       const { data } = await supabase.auth.getSession();
       setSession(data.session);
     };
     
-    // Llama a la función
     getSession();
     
-    // Configura el listener para cambios en la autenticación
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
     });
@@ -35,9 +32,11 @@ export default function NavBar() {
           <Link href="/" className="text-gray-300 hover:text-white">
             Home :)
           </Link>
-          <Link href="/study" className="text-gray-300 hover:text-white">
-            Study, Now!
-          </Link>
+          {session && (
+            <Link href="/study" className="text-gray-300 hover:text-white">
+              Study, Now!
+            </Link>
+          )}
           <Link href="/howto" className="text-gray-300 hover:text-white">
             How To
           </Link>

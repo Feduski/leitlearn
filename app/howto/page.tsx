@@ -8,7 +8,6 @@ export default function HowTo() {
         ¿Cómo funciona el Método Leitner?
       </h1>
 
-      {/* Descripción general */}
       <div className="max-w-3xl text-center text-lg leading-relaxed">
         <p className="text-gray-200 mb-4">
           El <strong>Método Leitner</strong> es un sistema de estudio basado en la
@@ -18,9 +17,7 @@ export default function HowTo() {
         </p>
       </div>
 
-      {/* Contenedores (cajas) explicadas */}
       <div className="flex flex-col md:flex-row gap-8 mt-8 w-full max-w-5xl">
-        {/* Caja 1 */}
         <div className="bg-gray-800 p-6 rounded rounded-br-[75px] shadow-md flex-1 text-left">
           <h2 className="text-xl font-semibold text-blue-300 mb-2">Caja 1: “Por aprender”</h2>
           <p className="text-gray-200">
@@ -34,7 +31,6 @@ export default function HowTo() {
           </p>
         </div>
 
-        {/* Caja 2 */}
         <div className="bg-gray-800 p-6 rounded rounded-br-[75px] shadow-md flex-1 text-left">
           <h2 className="text-xl font-semibold text-blue-300 mb-2">Caja 2: “En aprendizaje”</h2>
           <p className="text-gray-200">
@@ -46,7 +42,6 @@ export default function HowTo() {
           </p>
         </div>
 
-        {/* Caja 3 */}
         <div className="bg-gray-800 p-6 rounded rounded-br-[75px] shadow-md flex-1 text-left">
           <h2 className="text-xl font-semibold text-blue-300 mb-2">Caja 3: “Aprendidas”</h2>
           <p className="text-gray-200">
@@ -59,7 +54,6 @@ export default function HowTo() {
         </div>
       </div>
 
-      {/* CTA final */}
       <div className="mt-5 text-center">
         <p className="text-gray-300 text-lg pb-4">
           Con esta técnica, reforzás lo que ya sabes y dedicas más tiempo a lo que necesitas mejorar.

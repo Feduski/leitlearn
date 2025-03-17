@@ -9,9 +9,7 @@ export default function ProfilePage() {
   const router = useRouter();
 
   useEffect(() => {
-    // Función autoejecutable async dentro del useEffect
     const fetchSession = async () => {
-      // Obtén la sesión actual
       const { data } = await supabase.auth.getSession();
       setSession(data.session);
 
@@ -22,7 +20,6 @@ export default function ProfilePage() {
 
     fetchSession();
 
-    // Opcionalmente, escucha cambios en la sesión
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
       if (!session) {

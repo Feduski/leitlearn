@@ -80,10 +80,10 @@ export default function useDragAndDrop() {
   };
 
   const moveCard = (cardId: string, targetBoxId: string) => {
-    let movedCard: Card | null = null;
-    setBoxes((prev) =>
-      prev.map((box) => {
-        if (box.cards.find((card) => card.id === cardId)) {
+    setBoxes((prev) => {
+      let movedCard: Card | null = null;
+      let updated = prev.map((box) => {
+        if (box.cards.some((card) => card.id === cardId)) {
           const filtered = box.cards.filter((card) => {
             if (card.id === cardId) {
               movedCard = card;
@@ -94,17 +94,17 @@ export default function useDragAndDrop() {
           return { ...box, cards: filtered };
         }
         return box;
-      })
-    );
-    if (movedCard) {
-      setBoxes((prev) =>
-        prev.map((box) =>
+      });
+
+      if (movedCard) {
+        updated = updated.map((box) =>
           box.id === targetBoxId
             ? { ...box, cards: [...box.cards, movedCard!] }
             : box
-        )
-      );
-    }
+        );
+      }
+      return updated;
+    });
   };
 
   return { boxes, addCard, deleteCard, flipCard, moveCard };
