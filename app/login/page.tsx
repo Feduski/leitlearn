@@ -15,6 +15,7 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [showPasswordReset, setShowPasswordReset] = useState(false);
   const [resetEmail, setResetEmail] = useState("");
+  const [name, setName] = useState("")
 
   async function handleLogin(e:any) {
     e.preventDefault();
@@ -71,7 +72,7 @@ export default function LoginPage() {
           setErrorMsg(error.message);
         }
       } else if (data?.user) {
-        const profileError = await createProfile(data.user.id);
+        const profileError = await createProfile(data.user.id, name);
         if (profileError) {
           setErrorMsg("Error al crear el perfil");
         } else {
@@ -179,7 +180,7 @@ export default function LoginPage() {
   };
   
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900">
+    <div className="min-h-screen flex items-center justify-center bg-black">
       {showPasswordReset && <PasswordResetForm />}
       <div className={`flip-card ${isFlipped ? "flipped" : ""}`}>
         <div className="flip-card-inner">
@@ -232,6 +233,14 @@ export default function LoginPage() {
             <h2 className="text-2xl text-white mb-4">Crear cuenta</h2>
             {errorMsg && <p className="text-red-500">{errorMsg}</p>}
             <form onSubmit={handleSignUp}>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Nombre"
+                className="w-full p-2 mb-4 rounded bg-gray-700 text-white"
+                required
+              />
               <input
                 type="email"
                 value={email}
