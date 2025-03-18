@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 
 const openai = new OpenAI({apiKey: process.env.OPENAI_API_KEY});
-const prompt = process.env.OPENAI_PROMPT;
+const prompt = process.env.OPENAI_PROMPT || "Brindá un respuesta super corta y precisa a las preguntas del usuario.";
 
 export async function POST(req: Request) {
   try {

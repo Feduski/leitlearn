@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "../../lib/supabaseClient";
+import { createProfile } from "../../lib/profiles";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -69,9 +70,14 @@ export default function LoginPage() {
         } else {
           setErrorMsg(error.message);
         }
-      } else {
-        setErrorMsg("¡Registro exitoso! Revisa tu email para confirmar la cuenta.");
-        setTimeout(() => setIsFlipped(false), 2000);
+      } else if (data?.user) {
+        const profileError = await createProfile(data.user.id);
+        if (profileError) {
+          setErrorMsg("Error al crear el perfil");
+        } else {
+          setErrorMsg("¡Registro exitoso! Revisa tu email para confirmar la cuenta.");
+          setTimeout(() => setIsFlipped(false), 2000);
+        }
       }
     } catch (err : any) {
       setErrorMsg(err.message || "Error en el proceso de registro");
