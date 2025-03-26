@@ -72,7 +72,7 @@ export default function PricingPage() {
     <div className="min-h-screen p-8 flex flex-col items-center text-white bg-black">
       <h1 className="text-4xl font-bold text-blue-400 mb-6">Planes y Precios</h1>
       {successMsg && <p className="text-green-400 mb-4">{successMsg}</p>}
-      <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-3 gap-8 m-6">
         {plans.map((plan) => (
           <div key={plan.name} className="bg-gray-800 p-6 rounded-lg shadow-md text-center">
             <h2 className="text-2xl font-semibold text-blue-300 mb-2">{plan.name}</h2>
