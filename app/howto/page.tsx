@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function HowTo() {
   return (
-    <div className="min-h-screen p-8 flex flex-col items-center text-white">
+    <div className="min-h-screen p-8 flex flex-col items-center text-white bg-black">
       <h1 className="text-4xl font-bold text-blue-400 mb-6">
         ¿Cómo funciona el Método Leitner?
       </h1>

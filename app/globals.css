@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 20px;
     font-family: 'Roboto', sans-serif;
-    background-color: #121212;
+    background-color: #020101;
     color: #fff;
     text-align: center;
   }
@@ -219,7 +219,6 @@ body {
   box-shadow: 0 0 15px rgba(0,212,255,0.2);
 }
 
-/* Estilos mejorados para la tarjeta flip */
 .flip-card {
   perspective: 1000px;
   width: 400px;
