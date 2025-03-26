@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { supabase } from "../../lib/supabaseClient";
 import { Box } from "../hooks/useDragAndDrop";
+import { decrementUsage } from "../../lib/profiles";
 
 interface DropBoxProps {
   box: Box;
@@ -32,7 +34,34 @@ const DropBox: React.FC<DropBoxProps> = ({
     e.preventDefault();
   };
 
-  const handleAddCard = () => {
+  const handleAddCard = async () => {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (!user) {
+      alert("Error: No se pudo obtener el usuario.");
+      return;
+    }
+    const errorDecrement = await decrementUsage(user.id, "tarjetas");
+    if (errorDecrement) {
+      alert(errorDecrement.message);
+      return;
+    }
+    const { error } = await supabase
+      .from("cards")
+      .insert([{
+        user_id: user.id,
+        box: box.id,
+        question,
+        answer,
+        flipped: false
+      }]);
+    
+    if (error) {
+      alert("Error al guardar la tarjeta.");
+      return;
+    }
+    
     addCard(box.id, question, answer);
     setQuestion("");
     setAnswer("");
@@ -40,8 +69,18 @@ const DropBox: React.FC<DropBoxProps> = ({
   };
 
   const handleCompleteWithAI = async () => {
+    const {       data: { user }     } = await supabase.auth.getUser();
+
+    if (!user) {
+      alert("Error: No se pudo obtener el usuario.");
+      return;
+    }
+    const errorDecrement = await decrementUsage(user.id, "generaciones");
+    if (errorDecrement) {
+      alert(errorDecrement.message);
+      return;
+    }
     if (!question.trim()) return;
-    
     const res = await fetch("/api/generateAnswer", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -52,13 +91,14 @@ const DropBox: React.FC<DropBoxProps> = ({
   };
 
   return (
-    <div className="drop-box relative" id={box.id} onDragOver={handleDragOver} onDrop={handleDrop}>
+    <div className="drop-box relative" id={box.id} onDragOver={handleDragOver} onDrop={handleDrop}    >
       <div className="flex items-center justify-between w-full">
         <h2>{box.title}</h2>
         <button
           id={`plus-small-${box.id}`}
           style={{
-            display: box.cards.length > 0 && !showForm ? "inline-block" : "none",
+            display:
+              box.cards.length > 0 && !showForm ? "inline-block" : "none",
           }}
           onClick={() => setShowForm(true)}
           className="plus-btn-small"
@@ -69,7 +109,7 @@ const DropBox: React.FC<DropBoxProps> = ({
       <p>{box.description}</p>
 
       {box.cards.length === 0 && !showForm && (
-        <div id={`plus-big-${box.id}`} className="plus-btn-big" onClick={() => setShowForm(true)}>
+        <div id={`plus-big-${box.id}`} className="plus-btn-big" onClick={() => setShowForm(true)}        >
           +
         </div>
       )}
@@ -93,33 +133,34 @@ const DropBox: React.FC<DropBoxProps> = ({
             className="p-1 mb-1 w-full bg-gray-800 text-gray-200 rounded"
           />
           <div className="flex gap-2 justify-center">
-            <button onClick={handleAddCard} className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded">
+            <button onClick={handleAddCard} className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded"            >
               Crear
             </button>
-            <button onClick={handleCompleteWithAI} className="bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded">
+            <button onClick={handleCompleteWithAI} className="bg-gray-700 hover:bg-gray-600 text-white px-3 py-1 rounded"            >
               Completar con AI
             </button>
           </div>
         </div>
       )}
-    <div className="flex flex-col items-center w-full gap-4">
+
+      <div className="flex flex-col items-center w-full gap-4">
         {box.cards.map((card) => (
           <div
             key={card.id}
             id={card.id}
             className={`card ${card.flipped ? "flip" : ""}`}
             draggable
-            onDragStart={(e) => e.dataTransfer.setData("text/plain", card.id)}
+            onDragStart={(e) =>               e.dataTransfer.setData("text/plain", card.id)            }
             onClick={() => flipCard(box.id, card.id)}
           >
             <div className="card-inner">
               <div className="card-front">
                 <div className="question">{card.question}</div>
-                <button className="delete-btn" onClick={(e) => {
+                <button                   className="delete-btn"                   onClick={(e) => {
                     e.stopPropagation();
                     deleteCard(box.id, card.id);
-                    }}>
-                  ×</button>  
+                  }}>
+                  ×</button>
               </div>
               <div className="card-back">
                 <div className="answer">{card.answer}</div>

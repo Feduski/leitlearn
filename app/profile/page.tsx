@@ -6,9 +6,14 @@ import { useRouter } from "next/navigation";
 
 export default function ProfilePage() {
   const [session, setSession] = useState<any>(null);
-  const [profile, setProfile] = useState<{ name: string; tier: string } | null>(null);
-  const [isEditingName, setIsEditingName] = useState(false); 
-  const [newName, setNewName] = useState(""); 
+  const [profile, setProfile] = useState<{
+    name: string;
+    tier: string;
+    tarjetas_maximas: number;
+    generaciones_maximas: number;
+  } | null>(null);
+  const [isEditingName, setIsEditingName] = useState(false);
+  const [newName, setNewName] = useState("");
   const router = useRouter();
 
   useEffect(() => {
@@ -39,7 +44,7 @@ export default function ProfilePage() {
       if (!user) return;
       const { data, error } = await supabase
         .from("profiles")
-        .select("name, tier")
+        .select("name, tier, tarjetas_maximas, generaciones_maximas")
         .eq("id", user.id)
         .single();
       if (!error) {
@@ -86,7 +91,13 @@ export default function ProfilePage() {
           profile?.name
         )}
       </h1>
-      <h1>Mi perfil - Tier: {profile?.tier}</h1>
+      <h2 className="text-white mb-2">Plan Actual: {profile?.tier}</h2>
+      <p className="text-white mb-2">
+        Tarjetas disponibles: {profile?.tarjetas_maximas}
+      </p>
+      <p className="text-white mb-4">
+        Generaciones de IA disponibles: {profile?.generaciones_maximas}
+      </p>
       {isEditingName ? (
         <div className="flex gap-2 mt-4">
           <button
