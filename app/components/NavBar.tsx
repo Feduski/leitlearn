@@ -22,7 +22,7 @@ export default function NavBar() {
   }, []);
 
   return (
-    <nav className="bg-black p-4">
+    <nav className="bg-black p-4 site-nav">
       <div className="max-w-6xl mx-auto flex items-center justify-between">
         <div className="flex items-center gap-2">
           <img src="/favicon.ico" alt="Logo" className="h-8 w-auto" />
